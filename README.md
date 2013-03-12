@@ -4,7 +4,7 @@ CM10 for the EVO 4G
 
 |||
 |-----------------------------------:|:--------------------------|
-|**Discussion thread**: | http://forum.xda-developers.com/showthread.php?t=1625096
+|**Discussion thread**: | http://forum.xda-developers.com/showthread.php?t=2095198
 
 ## Building 
 
@@ -29,7 +29,7 @@ NOTE: This WILL take a long time.
 
 ### Finish setting up repo
 ```bash
-wget -O .repo/local_manifest.xml https://raw.github.com/jmztaylor/android_device_htc_supersonic/jellybean/Manifest/local_manifest.xml
+wget -O .repo/local_manifest.xml https://raw.github.com/kasual/android_device_htc_supersonic/jellybean/Manifest/local_manifests/local_manifest.xml
 ```
 
 ### Download my sources
