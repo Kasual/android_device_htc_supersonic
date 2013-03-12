@@ -29,7 +29,7 @@ NOTE: This WILL take a long time.
 
 ### Finish setting up repo
 ```bash
-wget -O .repo/local_manifest.xml https://raw.github.com/kasual/android_device_htc_supersonic/jellybean/Manifest/local_manifests/local_manifest.xml
+wget -O .repo/local_manifests/local_manifest.xml https://raw.github.com/kasual/android_device_htc_supersonic/jellybean/Manifest/local_manifest.xml
 ```
 
 ### Download my sources
