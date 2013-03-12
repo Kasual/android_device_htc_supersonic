@@ -31,15 +31,21 @@ PRODUCT_COPY_FILES += \
 $(call inherit-product-if-exists, vendor/htc/supersonic/supersonic-vendor.mk)
 
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.com.google.clientidbase=android-sprint-us \
-	ro.com.google.locationfeatures=1 \
-	ro.cdma.home.operator.numeric=310120 \
-	ro.cdma.home.operator.alpha=Sprint \
-	ro.setupwizard.enable_bypass=1 \
-	ro.media.dec.jpeg.memcap=20000000 \
-	ro.opengles.version=131072
+  ro.com.google.clientidbase=android-sprint-us \
+  ro.com.google.locationfeatures=1 \
+  ro.cdma.home.operator.numeric=310120 \
+  ro.cdma.home.operator.alpha=Sprint \
+  ro.setupwizard.enable_bypass=1 \
+  ro.media.dec.jpeg.memcap=20000000 \
+  ro.opengles.version=131072 \
+  ro.product.main_camera = 8M \
+  ro.product.front_camera = 1.3M
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/supersonic/overlay
+
+# Don't set /proc/sys/vm/dirty_ratio to 0 when USB mounting
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vold.umsdirtyratio=20
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
@@ -59,8 +65,9 @@ PRODUCT_PACKAGES := \
 
 PRODUCT_PACKAGES := \
     libmm-omxcore \
-    Torch
-	
+    Torch \
+    fmradio
+
 # USB
 ADDITIONAL_DEFAULT_PROPERTIES += \
     persist.sys.usb.config=mass_storage \
@@ -78,8 +85,41 @@ PRODUCT_COPY_FILES += \
     device/htc/supersonic/firmware/bcm4329.hcd:system/etc/firmware/bcm4329.hcd
 
 PRODUCT_COPY_FILES += \
-    device/htc/supersonic/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
-    device/htc/supersonic/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml
+    device/htc/supersonic/prebuilt/etc/vold.fstab:system/etc/vold.fstab
+#    device/htc/supersonic/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml
+
+# init.d
+PRODUCT_COPY_FILES += \
+    device/htc/supersonic/prebuilt/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
+    device/htc/supersonic/prebuilt/etc/init.d/05mountext:system/etc/init.d/05mountext \
+    device/htc/supersonic/prebuilt/etc/init.d/06handleswap:system/etc/init.d/06handleswap \
+    device/htc/supersonic/prebuilt/etc/init.d/20extgapps:system/etc/init.d/20extgapps \
+    device/htc/supersonic/prebuilt/etc/init.d/90marketfix:system/etc/init.d/90marketfix \
+    device/htc/supersonic/prebuilt/etc/init.d/99complete:system/etc/init.d/99complete
+#    device/htc/supersonic/prebuilt/etc/init.d/04apps2sd:system/etc/init.d/04apps2sd \
+#    device/htc/supersonic/prebuilt/etc/init.d/dtapp:system/etc/init.d/dtapp \
+#    device/htc/supersonic/prebuilt/etc/init.d/50-cm:system/etc/init.d/50-cm \
+
+# Apps2sd files
+PRODUCT_COPY_FILES += \
+    device/htc/supersonic/prebuilt/a2sd/a2sd:system/bin/a2sd \
+    device/htc/supersonic/prebuilt/a2sd/10apps2sd:system/etc/init.d/10apps2sd
+#    vendor/ev/prebuilt/common/prebuilt/a2sd/zipalign:system/xbin/zipalign \
+#    vendor/ev/prebuilt/common/prebuilt/a2sd/fix_permissions:system/bin/fix_permissions \
+#    device/htc/supersonic/prebuilt/a2sd/a2sd:system/bin/a2sd \
+#    device/htc/supersonic/prebuilt/a2sd/adbfix:system/bin/adbfix \
+#    device/htc/supersonic/prebuilt/a2sd/apps2sd.hlp:system/bin/apps2sd.hlp \
+#    device/htc/supersonic/prebuilt/a2sd/bash:system/bin/bash \
+#    device/htc/supersonic/prebuilt/a2sd/busybox.a2sd:system/bin/busybox.a2sd \
+#    device/htc/supersonic/prebuilt/a2sd/chka2sd:system/bin/chka \
+#    device/htc/supersonic/prebuilt/a2sd/dtinstall:system/bin/dtinstall \
+#    device/htc/supersonic/prebuilt/a2sd/e2fsck:system/bin/e2fsck \
+#    device/htc/supersonic/prebuilt/a2sd/fix_permissions:system/bin/fix_permissions \
+#    device/htc/supersonic/prebuilt/a2sd/launcha2sd:system/bin/launcha2sd \
+#    device/htc/supersonic/prebuilt/a2sd/starta2sd:system/bin/starta2sd \
+#    device/htc/supersonic/prebuilt/a2sd/sysinit:system/bin/sysinit \
+#    device/htc/supersonic/prebuilt/a2sd/tune2fs:system/bin/tune2fs \
+#    device/htc/supersonic/prebuilt/a2sd/zipalign:system/bin/zipalign
 
 # sysctl
 PRODUCT_COPY_FILES += \
@@ -114,3 +154,4 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 PRODUCT_NAME := htc_supersonic
 PRODUCT_DEVICE := supersonic
 PRODUCT_MODEL := Full Android on Supersonic
+
