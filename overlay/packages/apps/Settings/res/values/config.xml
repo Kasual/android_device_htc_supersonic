@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 The CyanogenMod Project
+<!-- Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,18 +15,10 @@
 -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="additional_system_update">com.samsung.sdm</string>
+    <string name="additional_system_update_menu">com.samsung.sdm.ui.SprintUpdateSetting</string>
 
     <!-- If false, MIN is displayed. If true, MSID is displayed. -->
-    <bool name="config_msid_enable" translatable="false">false</bool>
-
-    <string name="additional_system_update" translatable="false">com.samsung.update</string>
-    <string name="additional_system_update_menu" translatable="false">com.samsung.update.UpdateSetting</string>
-
-    <!-- LED Flashlight -->
-    <bool name="has_led_flash">true</bool>
-
-    <!-- Volume Rocker Wake Support. Some devices do not support (PMU) this.
-         Setting to false will disable Volume Rocker Wake support -->
-    <bool name="config_show_volumeRockerWake">true</bool>
+    <bool name="config_msid_enable">true</bool>
 
 </resources>

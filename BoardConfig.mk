@@ -25,11 +25,14 @@
 # against the traditional rules of inheritance).
 USE_CAMERA_STUB := true
 # Additional Camera hacks
+#BOARD_USES_LEGACY_QCOM := true
 TARGET_LEGACY_CAMERA := true
 TARGET_CAMERA_WRAPPER := qsd8k
 BOARD_HAVE_HTC_FFC := true
 BOARD_USES_LEGACY_RIL := true
 
+# Default values, possibly overridden by BoardConfigVendor.mk
+TARGET_BOARD_INFO_FILE := device/htc/supersonic/board-info.txt
 # inherit from the proprietary version
 -include vendor/htc/supersonic/BoardConfigVendor.mk
 # inherit common defines for all qsd8k devices
@@ -46,10 +49,6 @@ BOARD_USE_OPENSSL_ENGINE := true
 BOARD_USE_FROYO_LIBCAMERA := true
 BOARD_USE_REVERSE_FFC := true
 
-# FM radio
-COMMON_GLOBAL_CFLAGS += -DSTE_FM
-BOARD_USES_STE_FMRADIO := true
-
 BOARD_HAVE_FM_RADIO := true
 BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 
@@ -57,10 +56,8 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := supersonic
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
 
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
-#TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun%d/file
-#TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun%d/file
-#TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun0/file
-#TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun1/file
+
+TARGET_PROVIDES_INIT_RC := false
 
 # # cat /proc/mtd
 # dev:    size   erasesize  name
@@ -73,30 +70,17 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/f
 # mtd6: 1aba0000 00020000 "userdata"
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00280000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00500000
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x15e00000   # limited so we enforce room to grow
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x15e00000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x1aba0000
 
-#BOARD_FLASH_BLOCK_SIZE := 2048
-BOARD_FLASH_BLOCK_SIZE := 131072
+BOARD_FLASH_BLOCK_SIZE := 2048
+#BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Force use of power button in recovery for Supersonic
 BOARD_HAS_NO_SELECT_BUTTON := 1
 
-#TARGET_RECOVERY_UI_LIB := librecovery_ui_supersonic librecovery_ui_htc
+TARGET_RECOVERY_UI_LIB := librecovery_ui_supersonic librecovery_ui_htc
+#TARGET_RELEASETOOLS_EXTENSIONS := device/htc/supersonic
 
-# Define kernel config for inline building
-TARGET_KERNEL_SOURCE    := kernel/htc/qsd8k
-#TARGET_KERNEL_CONFIG    := mazwoz_supersonic_sbc_defconfig
 TARGET_KERNEL_CONFIG    := evervolv_supersonic_defconfig
 TARGET_PREBUILT_KERNEL  := device/htc/supersonic/prebuilt/root/kernel
-
-#twrp
-#TARGET_RECOVERY_INITRC := device/htc/supersonic/prebuilt/root/init.rc
-TWRP_EVENT_LOGGING := true
-DEVICE_RESOLUTION := 480x800
-#RECOVERY_GRAPHICS_USE_LINELENGTH := true
-#TW_INTERNAL_STORAGE_PATH := "/data/media"
-#TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
-#TW_EXTERNAL_STORAGE_PATH := "/sdcard"
-#TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard"
-TARGET_RELEASETOOLS_EXTENSIONS := device/htc/common
